@@ -2,6 +2,7 @@ import { useState } from "react";
 import movies from "../data/movies.json";
 
 import "./Main.css";
+import Movie from "./Movie";
 
 function Main() {
     const [moviesToDisplay, setmoviesToDisplay] = useState(movies)
@@ -27,22 +28,10 @@ function Main() {
   return (
     <div className="Main">
             {message}
-      {moviesToDisplay.map((e) => {
+      {moviesToDisplay.map((movieObj) => {
         return (
-          <section key={e.id} className="card">
-            <h2>{e.title}</h2>
-
-            { e.imgURL 
-            ? <img src={e.imgURL}/>
-            :  <img src="https://dummyimage.com/182x268/ffffff/000000" /> 
-            }
-
-            <h3>Rating: {e.rating}</h3>
-            {e.rating >= 8 && <p>RECOMMENDED</p>}  
-            {/* if the 1st part is true, && > apply this/render this */}
-
-            <button onClick={() => {deleteMovie(e.id)}}>Delete</button>
-          </section>
+          <Movie movieDetails={movieObj} delete={deleteMovie}/>
+  
         );
       })}
 
@@ -50,6 +39,6 @@ function Main() {
   );
 }
 
-export default Main;
+export default Main
 
 
