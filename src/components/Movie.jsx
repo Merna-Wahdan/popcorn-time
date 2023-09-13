@@ -5,9 +5,9 @@ import "./Main.css";
 
 function Movie (props) {
 
-    const handleDeleteClick = () => {
-        props.delete(props.movieDetails.id);
-      };
+    // const handleDeleteClick = () => {
+    //     props.delete(props.movieDetails.id);
+    //   };
       
      return (
         <section key={props.movieDetails.id} className="card">
@@ -21,7 +21,7 @@ function Movie (props) {
             <h3>Rating: {props.movieDetails.rating}</h3>
             {props.movieDetails.rating > 8 && <p>RECOMMENDED</p>}
 
-            <button onClick={handleDeleteClick}>Delete</button>
+            <button onClick={() => { props.callbackToDelete(props.movieDetails.id) }}>Delete</button>
         </section>
     )
 }

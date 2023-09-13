@@ -3,35 +3,22 @@ import movies from "../data/movies.json";
 
 import "./Main.css";
 import Movie from "./Movie";
+import Header from "./Header";
 
-function Main() {
+function Main(props) {
     const [moviesToDisplay, setmoviesToDisplay] = useState(movies)
 
-    const deleteMovie = (movieId) => {
-        console.log("deleteing movie...", movieId);
-        const newList = moviesToDisplay.filter((e) => {
-            return e.id !== movieId
-        })
-        setmoviesToDisplay(newList)    
 
-}
 
-    let message;
-    if(moviesToDisplay.length > 0) {
-        message = <h1>Number of movies: {moviesToDisplay.length}</h1>
-
-    } else {
-        message = <h1>Sorry, no movies to display</h1>
-    }
-
+   
 
   return (
     <div className="Main">
-            {message}
-      {moviesToDisplay.map((movieObj) => {
+      {props.movies.map((movieObj) => {
         return (
-          <Movie movieDetails={movieObj} delete={deleteMovie}/>
-  
+          <>
+          <Movie key={movieObj.id} movieDetails={movieObj} callbackToDelete={props.callbackToDelete} />
+          </>
         );
       })}
 
