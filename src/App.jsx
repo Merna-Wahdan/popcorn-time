@@ -1,82 +1,92 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+// import { useState } from 'react'
+// import reactLogo from './assets/react.svg'
+// import viteLogo from '/vite.svg'
+
+// import movies from "./data/movies.json";
+
+// import Header from './components/Header'
+// import Footer from './components/Footer'
+// import Main from './components/Main'
+// import AddMovie from './components/AddMovie';
+// import './App.css'
+
+// function App() {
+//   const [moviesToDisplay, setmoviesToDisplay] = useState(movies)
+  
+
+//   const deleteMovie = (movieTitle) => {
+//     const newList = moviesToDisplay.filter((e) => {
+//         return e.title !== movieTitle
+//     })
+//     setmoviesToDisplay(newList)    
+
+// }
+
+// const addNewMovie = (newMovie) => {
+// const newList = [newMovie, ...moviesToDisplay] //push> push a state 
+// setmoviesToDisplay(newList)
+
+// }
+
+//   return (
+//     <>
+//       <Header numberOfMovies={moviesToDisplay.length}/>
+      
+//       <Main movies={moviesToDisplay} callbackToDelete={deleteMovie}/> 
+//       <AddMovie callbackToAddMovie={addNewMovie}/>
+//       <Footer />
+
+//     </>   
+//   )
+// }
+
+// export default App
+
+//props is to render object component
+
+
+
+
+
+
+import { useState } from "react";
 
 import movies from "./data/movies.json";
 
 import Header from './components/Header'
-import Footer from './components/Footer'
+import AddMovie from "./components/AddMovie";
 import Main from './components/Main'
+import Footer from './components/Footer'
+
 import './App.css'
 
 function App() {
-  const [moviesToDisplay, setmoviesToDisplay] = useState(movies)
-  const [title, setTitle] = useState("")
-  const [rating, setRating] = useState("")
+
+  const [moviesToDisplay, setMoviesToDisplay] = useState(movies);
 
   const deleteMovie = (movieTitle) => {
-    const newList = moviesToDisplay.filter((e) => {
-        return e.title !== movieTitle
-    })
-    setmoviesToDisplay(newList)    
-
-}
-
-
-const handleSubmit = (e) => {
-  e.preventDefault();
-  const newMovie = {
-    title: title,
-    rating: rating
+    const newList = moviesToDisplay.filter((element) => {
+      return element.title !== movieTitle;
+    });
+    setMoviesToDisplay(newList);
   }
-const newList = [newMovie, ...moviesToDisplay] //push> push a state 
-setmoviesToDisplay(newList)
 
-//clear form
-setTitle("")
-setRating("")
 
-}
+
+  const addNewMovie = (newMovie) => {
+    const newList = [newMovie, ...moviesToDisplay];
+    setMoviesToDisplay(newList);
+  }
+
 
   return (
     <>
-      <Header numberOfMovies={moviesToDisplay.length}/>
-      <form onSubmit={handleSubmit}>
-<label> 
-  Title:
-        <input 
-        type="text" 
-        name="title" 
-        required
-        placeholder="enter the title"
-        value={title} 
-        //whenever the user type, its updates here
-        onChange={(e) => { setTitle(e.target.value) }}/> 
-
-</label>
-
-<label>
-  Rating:
-<input name="rating" 
-type="number"
-required
-min={1}
-max={10}
-value={rating}
-onChange={(e) => { setRating(e.target.value)}} />
-</label>
-
-
-
-        <button>Create</button>
-      </form>
-      <Main movies={moviesToDisplay} callbackToDelete={deleteMovie}/> 
+      <Header numberOfMovies={moviesToDisplay.length} />
+      <AddMovie callbackToAddMovie={addNewMovie} />
+      <Main movies={moviesToDisplay} callbackToDelete={deleteMovie} />
       <Footer />
-
-    </>   
+    </>
   )
 }
 
 export default App
-
-//props is to render object component
