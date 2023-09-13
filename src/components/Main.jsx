@@ -14,10 +14,10 @@ function Main(props) {
 
   return (
     <div className="Main">
-      {props.movies.map((movieObj) => {
+      {props.movies.map((movieObj, index) => {
         return (
           <>
-          <Movie key={movieObj.id} movieDetails={movieObj} callbackToDelete={props.callbackToDelete} />
+          <Movie key={index} movieDetails={movieObj} callbackToDelete={props.callbackToDelete} />
           </>
         );
       })}
